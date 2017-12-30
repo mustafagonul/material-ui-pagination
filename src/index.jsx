@@ -1,12 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FlatButton from 'material-ui/FlatButton';
-import NavigationFirstPage from 'material-ui/svg-icons/navigation/first-page';
-import NavigationLastPage from 'material-ui/svg-icons/navigation/last-page';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+import NavigationFirstPage from 'material-ui-icons/FirstPage';
+import NavigationLastPage from 'material-ui-icons/LastPage';
+import { withTheme } from 'material-ui/styles'
 
 const flatButtonStyle = {
   minWidth: 16,
 };
+
+// TODO: ???
+const containerStyle = {
+  display: 'flex',
+  // 'flex-direction': 'row'
+}
+
 
 const calculateRange = arg => {
   const { total, current, display } = arg;
@@ -44,12 +53,15 @@ const getStateFromProps = props => {
 };
 
 const Page = ({ value, isActive, onClick, styleButton, stylePrimary }) => {
-  return !styleButton ? (<FlatButton
+  return !styleButton ? (<Button
     style = { flatButtonStyle }
-    label = { value.toString() }
-    primary = { isActive }
-    onClick = { onClick }
-  />) : (<div
+    color = { isActive ? "primary" : ""}
+    onClick = { onClick } >
+    <Typography>
+      { value.toString() }
+    </Typography>
+    </Button>
+  ) : (<div
     style = { isActive ? stylePrimary : styleButton }
     label = { value.toString() }
     onClick = { onClick }
@@ -67,11 +79,12 @@ Page.propTypes = {
 };
 
 const FirstPageLink = ({ onClick, styleFirstPageLink }) => {
-  return !styleFirstPageLink ? (<FlatButton
+  return !styleFirstPageLink ? (<Button
     style = { flatButtonStyle }
-    icon = { <NavigationFirstPage /> }
-    onClick = { onClick }
-  />) : (<div
+    onClick = { onClick } >
+      <NavigationFirstPage />
+    </Button>
+  ) : (<div
     style = { styleFirstPageLink }
     onClick = { onClick }
   />);
@@ -83,11 +96,12 @@ FirstPageLink.propTypes = {
 };
 
 const LastPageLink = ({ onClick, styleLastPageLink }) => {
-  return !styleLastPageLink ? (<FlatButton
+  return !styleLastPageLink ? (<Button
     style = { flatButtonStyle }
-    icon = { <NavigationLastPage /> }
-    onClick = { onClick }
-  />) : (<div
+    onClick = { onClick } >
+      <NavigationLastPage />
+    </Button>
+  ) : (<div
     style = { styleLastPageLink }
     onClick = { onClick }
   />);
@@ -135,7 +149,9 @@ class Pagination extends React.Component {
     }
 
     return (
-      <div style={this.props.styleRoot}>
+      // TODO: ???
+      //<div style={this.props.styleRoot}>
+      <div style={containerStyle}>
         <FirstPageLink
           onClick = { () => this.setCurrent(1) }
           styleFirstPageLink = { this.props.styleFirstPageLink }
@@ -189,4 +205,4 @@ Pagination.defaultProps = {
 };
 
 Pagination.displayName = 'Pagination';
-export default Pagination;
+export default withTheme()(Pagination);
