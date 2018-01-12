@@ -55,7 +55,7 @@ const getStateFromProps = props => {
 const Page = ({ value, isActive, onClick, styleButton, stylePrimary }) => {
   return !styleButton ? (<Button
     style = { flatButtonStyle }
-    color = { isActive ? "primary" : ""}
+    color = { isActive ? "primary" : "default"}
     onClick = { onClick } >
     <Typography>
       { value.toString() }
