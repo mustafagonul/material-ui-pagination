@@ -57,9 +57,7 @@ const Page = ({ value, isActive, onClick, styleButton, stylePrimary }) => {
     style = { flatButtonStyle }
     color = { isActive ? "primary" : "default"}
     onClick = { onClick } >
-    <Typography>
       { value.toString() }
-    </Typography>
     </Button>
   ) : (<div
     style = { isActive ? stylePrimary : styleButton }
